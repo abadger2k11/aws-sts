@@ -73,7 +73,7 @@ const Google = {
     // TOTP from Google Authenticator MFA
     // ToDo: need to modify this for users that aren't using MFA
     let totp = yield ci.prompt({
-      type: 'password',
+      type: 'input',
       message: 'Verification code from Google Authenticator app:'
     });
 
