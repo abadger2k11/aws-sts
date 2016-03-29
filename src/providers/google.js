@@ -38,13 +38,13 @@ const Google = {
       .type('input[name="Email"]', username)
       .click('input[name="signIn"]')
       .wait('body')
-      .exists('#signin-feedback');
+      .exists('#error-msg');
     spinner.stop();
 
     if (hasError) {
       yield logBody(nightmare);
       let errMsg = yield nightmare.evaluate(function() {
-        return document.querySelector('#signin-feedback').innerText;
+        return document.querySelector('#error-msg').innerText;
       });
       throw new Error(errMsg);
     }
@@ -59,13 +59,13 @@ const Google = {
       .type('input[name="Passwd"]', password)
       .click('input[name="signIn"]')
       .wait('body')
-      .exists('#signin-feedback');
+      .exists('#error-msg');
     spinner.stop();
 
     if (hasError) {
       yield logBody(nightmare);
       let errMsg = yield nightmare.evaluate(function() {
-        return document.querySelector('#signin-feedback').innerText;
+        return document.querySelector('#error-msg').innerText;
       });
       throw new Error(errMsg);
     }
@@ -73,7 +73,7 @@ const Google = {
     // TOTP from Google Authenticator MFA
     // ToDo: need to modify this for users that aren't using MFA
     let totp = yield ci.prompt({
-      type: 'input',
+      type: 'password',
       message: 'Verification code from Google Authenticator app:'
     });
 
@@ -81,13 +81,13 @@ const Google = {
       .type('input[name="Pin"]', totp)
       .click('input[id="submit"]')
       .wait('body')
-      .exists('#signin-feedback');
+      .exists('#error-msg');
     spinner.stop();
 
     if (hasError) {
       yield logBody(nightmare);
       let errMsg = yield nightmare.evaluate(function() {
-        return document.querySelector('#signin-feedback').innerText;
+        return document.querySelector('#error-msg').innerText;
       });
       throw new Error(errMsg);
     }
