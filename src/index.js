@@ -24,7 +24,6 @@ co(function *() {
 
   let args = parseArgs(provider.name);
   let samlAssertion = yield provider.login(config.idpEntryUrl, args.username, args.password);
-  console.log(samlAssertion)
   let role = yield selectRole(samlAssertion, args.role);
   let token = yield getToken(samlAssertion, args.account, role);
   let profileName = buildProfileName(role, args.account, args.profile);
